@@ -156,3 +156,6 @@ Route::get("comp",[App\Http\Controllers\ComponentController::class, "index"]);
 
 
 
+
+
+Route::get("orm",[App\Http\Controllers\ORMController::class,"index"]);
