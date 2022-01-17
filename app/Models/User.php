@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -41,4 +40,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function cnic()
+    {
+        return $this->hasOne(UserCNIC::class,"user_id","id");
+    }
+
+
+    function address()
+    {
+        return $this->hasMany(UserAddress::class,"user_id","id");
+    }
+
 }

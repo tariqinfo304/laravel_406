@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRazaTablesTable extends Migration
+class UserAddress extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateRazaTablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('raza_tables', function (Blueprint $table) {
-            $table->id("tariq_id");
-            $table->string("name");
+        Schema::create("user_address",function(Blueprint $table){
+
+            $table->id();
+            $table->string("address");
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users");
         });
@@ -28,6 +29,6 @@ class CreateRazaTablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('raza_tables');
+        Schema::dropIfExists('user_address');
     }
 }
