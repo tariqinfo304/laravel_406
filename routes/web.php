@@ -159,3 +159,29 @@ Route::get("comp",[App\Http\Controllers\ComponentController::class, "index"]);
 
 
 Route::get("orm",[App\Http\Controllers\ORMController::class,"index"]);
+
+
+
+//Template integration
+
+
+
+Route::prefix("web")->group(function(){
+
+	Route::get("/",[App\Http\Controllers\Web\HomeController::class,"index"]);
+	Route::get("shop",[App\Http\Controllers\Web\HomeController::class,"shop"]);
+	Route::get("shop_detail",[App\Http\Controllers\Web\HomeController::class,"shop_detail"]);
+
+
+
+	Route::get("shop_cart",[App\Http\Controllers\Web\HomeController::class,"shop_cart"]);
+	Route::get("checkout",[App\Http\Controllers\Web\HomeController::class,"checkout"]);
+	Route::get("contact",[App\Http\Controllers\Web\HomeController::class,"contact"]);
+	Route::get("blog_detail",[App\Http\Controllers\Web\HomeController::class,"blog_detail"]);
+	Route::get("blog",[App\Http\Controllers\Web\HomeController::class,"blog"]);
+	
+
+});
+
+
+
