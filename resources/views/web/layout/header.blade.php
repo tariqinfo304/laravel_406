@@ -118,10 +118,11 @@
                                 <li><a href="{{ URL('web/shop_cart') }}">Shoping Cart</a></li>
                                 <li><a href="{{ URL('web/checkout') }}">Check Out</a></li>
                                 <li><a href="{{ URL('web/blog_detail') }}">Blog Details</a></li>
+                                 <li><a href="{{ URL('web/blog') }}">Blog</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ URL('web/blog') }}">Blog</a></li>
                         <li><a href="{{ URL('web/contact') }}">Contact</a></li>
+                        <li><a href="{{ URL('web/product') }}">Product</a></li>
                     </ul>
                 </nav>
             </div>

@@ -179,6 +179,10 @@ Route::prefix("web")->group(function(){
 	Route::get("contact",[App\Http\Controllers\Web\HomeController::class,"contact"]);
 	Route::get("blog_detail",[App\Http\Controllers\Web\HomeController::class,"blog_detail"]);
 	Route::get("blog",[App\Http\Controllers\Web\HomeController::class,"blog"]);
+
+
+
+	Route::resource("product",App\Http\Controllers\Web\ProductController::class);
 	
 
 });
