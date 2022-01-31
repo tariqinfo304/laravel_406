@@ -10,6 +10,9 @@ use App\Models\User;
 use App\Models\UserCNIC;
 use App\Models\UserAddress;
 
+use App\Models\Course;
+use App\Models\Student;
+
 class ORMController extends Controller
 {
     function index()
@@ -158,10 +161,19 @@ class ORMController extends Controller
         //dd($address);
         //in-direct
 
-        $user = UserAddress::find(1)->user;
-        dd($user);
+       // $user = UserAddress::find(1)->user;
+       // dd($user);
 
 
+
+        //Many to Many
+
+
+       // $c = Course::find(1);
+       // dd($c->stduent_list);
+
+        $s = Student::find(1);
+        dd($s->course_list);
 
 
 

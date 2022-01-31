@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductImages;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view("web.product.listing");
+        $listing  = Product::all();
+
+        return view("web.product.listing")->with("list", $listing );
     }
 
     /**
@@ -23,9 +26,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $req)
     {
-        return view("web.product.add_edit")->with("title","Add Product");
+        return view("web.product.add_edit")
+                        ->with("title","Add Product");
     }
 
     /**
@@ -60,12 +64,25 @@ class ProductController extends Controller
             $p->display_image = $path;
         }
 
+
         $p->name = $request->name;
         $p->price = $request->price;
         $p->qty = $request->qty;
         $p->description = $request->description;
         
         $p->save();
+
+
+        if($request->has("product_images"))
+        {
+            foreach($request->product_images as $file)
+            {
+                $image = new ProductImages();
+                $image->product_id  = $p->id;
+                $image->image = $file->store("upload");
+                $image->save();
+            }
+        }
 
         return redirect("web/product");
     }
@@ -78,7 +95,17 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $obj = NULL;
+
+        if(!empty($id))
+        {
+            $obj = Product::find($id);
+        }
+        return view("web.product.preview")
+                        ->with("title","Delete Product")
+                        ->with("id",$id)
+                        ->with("obj",$obj);
     }
 
     /**
@@ -89,7 +116,16 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = NULL;
+
+        if(!empty($id))
+        {
+            $obj = Product::find($id);
+        }
+        return view("web.product.add_edit")
+                        ->with("title","Edit Product")
+                        ->with("id",$id)
+                        ->with("obj",$obj);
     }
 
     /**
@@ -101,7 +137,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $request->validate([
+            "name" => "required|min:5",
+            "price" => "required|integer",
+            "qty"   => "required|integer",
+            "description" => "required|min:5"
+        ]);
+
+        $obj = Product::find($id);
+        $obj->name = $request->name ?? $obj->name;
+        $obj->price = $request->price ?? $obj->price;
+        $obj->qty = $request->qty ?? $obj->qty;
+        $obj->description = $request->description ?? $obj->description;
+
+        $obj->save();
+
+         return redirect("web/product");
+
     }
 
     /**
@@ -112,6 +164,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!empty($id))
+        {
+            $obj = Product::find($id);
+            $obj->delete();
+
+            return redirect("web/product");
+
+        }
     }
 }

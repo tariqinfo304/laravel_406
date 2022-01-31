@@ -1,12 +1,12 @@
 @extends("web.layout.layout")
 
 @section("title")
-	Product Listing
+    {{ $title }}
 @endsection
 
 @section("content")
-	
-	<!-- Hero Section Begin -->
+    
+      <!-- Hero Section Begin -->
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
@@ -68,7 +68,7 @@
                         <h2>Checkout</h2>
                         <div class="breadcrumb__option">
                             <a href="{{ URL('web') }}">Home</a>
-                            <span>Product Listing</span>
+                            <span>{{ $title }}</span>
                         </div>
                     </div>
                 </div>
@@ -81,42 +81,49 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                
-                <h4> Product Listing <a style="float: right;" href="{{ URL('web/product/create') }}"><button class="btn btn-primary"><i class="fa fa-plus"></i> &nbsp;Add Product</button><a/></h4>
+                <h4>
 
-                <table class="table table-dark">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Image</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Quantity</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Action</th>
+                Delete
+                Product</h4>
 
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($list as $row)
-                        <tr>
-                          <th scope="row">{{ $row->id }}</th>
-                          <td><img width="200px" height="200px" src="{{ Asset($row->display_image) }}" alt="{{ $row->name }}" /></td>
-                          <td>{{ $row->name }}</td>
-                          <td>{{ $row->price }}</td>
-                          <td>{{ $row->qty }}</td>
-                          <td>{{ $row->description }}</td>
-                          <td>
-                              
-                              <a href="{{ URL('web/product/'.$row->id.'/edit') }}"><i class="fa fa-edit"></i></a>
-                              &nbsp;&nbsp;&nbsp;&nbsp;
-                              <a href="{{ URL('web/product',$row->id) }}"><i class="fa fa-remove"></i></a>
-                          </td>
-                        </tr>
-                    @endforeach
-                  </tbody>
-                </table>
+                    <form action="{{ URL('web/product',$id) }}" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{ $id}}"/>
+                        @method("delete")
+           
+
+                    @csrf()
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Product Name<span>*</span></p>
+                                        <input value="{{ !empty($id) ? $obj->name : old('name') }}" disabled name="name" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Price<span>*</span></p>
+                                        <input value="{{ !empty($id) ? $obj->price : old('price') }}" disabled name="price" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Quantity<span>*</span></p>
+                                <input disabled value="{{ !empty($id) ? $obj->qty :  old('qty') }}"  name="qty" type="number">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Description<span>*</span></p>
+                                <input  disabled value="{{ !empty($id) ? $obj->description : old('description') }}" name="description" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                          
+                <input class="btn btn-primary" type="submit" value="Delete Product" />
+                             
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
