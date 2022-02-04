@@ -67,9 +67,8 @@
                     <div class="breadcrumb__text">
                         <h2>Vegetable’s Package</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <a href="./index.html">Vegetables</a>
-                            <span>Vegetable’s Package</span>
+                            <a href="{{ URL('web') }}">Home</a>
+                            <span>{{ $obj->name }}</span>
                         </div>
                     </div>
                 </div>
@@ -85,24 +84,24 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
-                            <img class="product__details__pic__item--large"
-                                src="{{ Asset('img/product/details/product-details-1.jpg')}}" alt="">
+                            @foreach($images as $row)
+                                <img class="product__details__pic__item--large"
+                                src="{{ Asset($row->image)}}" alt="">
+                                @break
+                            @endforeach
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
-                            <img data-imgbigurl="{{ Asset('img/product/details/product-details-2.jpg')}}"
-                                src="{{ Asset('img/product/details/thumb-1.jpg')}}" alt="">
-                            <img data-imgbigurl="{{ Asset('img/product/details/product-details-3.jpg')}}"
-                                src="{{ Asset('img/product/details/thumb-2.jpg')}}" alt="">
-                            <img data-imgbigurl="{{ Asset('img/product/details/product-details-5.jpg')}}"
-                                src="{{ Asset('img/product/details/thumb-3.jpg')}}" alt="">
-                            <img data-imgbigurl="{{ Asset('img/product/details/product-details-4.jpg')}}"
-                                src="{{ Asset('img/product/details/thumb-4.jpg')}}" alt="">
+
+                            @foreach($images as $row)
+                                <img data-imgbigurl="{{ Asset($row->image)}}"
+                                src="{{ Asset($row->image)}}" alt="">
+                            @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>Vetgetable’s Package</h3>
+                        <h3>{{ $obj->name }}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -111,10 +110,8 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">$50.00</div>
-                        <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-                            vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-                            quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
+                        <div class="product__details__price">$&nbsp;{{ $obj->price }}</div>
+                        <p>{{ $obj->description }}</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">

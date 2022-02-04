@@ -92,9 +92,25 @@
                                 <li><a href="#">English</a></li>
                             </ul>
                         </div>
+
+
+                        @if(empty(session("email")))
+                            <div class="header__top__right__auth">
+                                <a href="{{ URL('web/login')}}"><i class="fa fa-user"></i> Login</a>
+                               
+                            </div>
+                            <div class="header__top__right__auth">
+                            
+                                <a href="{{ URL('web/register') }}"><i class="fa fa-user"></i> Register</a>
+                            </div>
+
+                        @else
+
                         <div class="header__top__right__auth">
-                            <a href="#"><i class="fa fa-user"></i> Login</a>
-                        </div>
+                                <a href="{{ URL('web/logout')}}"><i class="fa fa-user"></i> Logout</a>
+                               
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -122,7 +138,9 @@
                             </ul>
                         </li>
                         <li><a href="{{ URL('web/contact') }}">Contact</a></li>
-                        <li><a href="{{ URL('web/product') }}">Product</a></li>
+                        @if(!empty(session("email")))
+                            <li><a href="{{ URL('web/product') }}">Product</a></li>
+                        @endif
                     </ul>
                 </nav>
             </div>

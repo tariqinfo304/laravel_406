@@ -168,9 +168,18 @@ Route::get("orm",[App\Http\Controllers\ORMController::class,"index"]);
 
 Route::prefix("web")->group(function(){
 
+
+
+	Route::get("login",[App\Http\Controllers\Web\LoginController::class,"index"]);
+	Route::get("logout",[App\Http\Controllers\Web\LoginController::class,"logout"]);
+	Route::post("login",[App\Http\Controllers\Web\LoginController::class,"login"]);
+	Route::get("register",[App\Http\Controllers\Web\LoginController::class,"add_user"]);
+	Route::post("register",[App\Http\Controllers\Web\LoginController::class,"save"]);
+
 	Route::get("/",[App\Http\Controllers\Web\HomeController::class,"index"]);
-	Route::get("shop",[App\Http\Controllers\Web\HomeController::class,"shop"]);
-	Route::get("shop_detail",[App\Http\Controllers\Web\HomeController::class,"shop_detail"]);
+	
+	Route::get("shop",[App\Http\Controllers\Web\ShopController::class,"index"]);
+	Route::get("shop_detail/{id}",[App\Http\Controllers\Web\ShopController::class,"shop_detail"]);
 
 
 
@@ -182,7 +191,8 @@ Route::prefix("web")->group(function(){
 
 
 
-	Route::resource("product",App\Http\Controllers\Web\ProductController::class);
+	Route::resource("product",App\Http\Controllers\Web\ProductController::class)
+		->middleware("session");
 	
 
 });
