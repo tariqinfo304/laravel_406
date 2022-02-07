@@ -398,9 +398,12 @@
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="{{ Asset($row->display_image)}}">
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+
+                                                @if(!empty(session("email")))
+                                                    <li><a href="{{ URL('web/fav',$row->id) }}"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                @endif
                                             </ul>
                                         </div>
                                         <div class="product__item__text">

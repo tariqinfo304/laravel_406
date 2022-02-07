@@ -190,9 +190,22 @@ Route::prefix("web")->group(function(){
 	Route::get("blog",[App\Http\Controllers\Web\HomeController::class,"blog"]);
 
 
+	
+	Route::get("fav/{id}",[App\Http\Controllers\Web\ProductController::class,"fav"])
+		->middleware("session");
+
+
+	Route::get("fav_list",[App\Http\Controllers\Web\ProductController::class,"fav_list"])
+		->middleware("session");
+
+	Route::get("remove_fav/{id}",[App\Http\Controllers\Web\ProductController::class,"remove_fav"])
+		->middleware("session");
 
 	Route::resource("product",App\Http\Controllers\Web\ProductController::class)
 		->middleware("session");
+
+
+
 	
 
 });

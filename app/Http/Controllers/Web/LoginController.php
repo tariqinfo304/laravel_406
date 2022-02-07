@@ -54,7 +54,8 @@ class LoginController extends Controller
         {
             session([
                 "email" => $user->email,
-                "name" => $user->name
+                "name" => $user->name,
+                "user_id" => $user->id
             ]);
             if(Hash::check($req->password,$user->password))
             {

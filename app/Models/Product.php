@@ -15,4 +15,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductImages::class,"product_id","id");
     }
+
+
+    function fav()
+    {
+        return $this->hasMany(FavModel::class,"product_id","id");
+    }
 }

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductImages;
 
+use App\Models\FavModel;
+use DB;
+
 class ProductController extends Controller
 {
     /**
@@ -172,5 +175,41 @@ class ProductController extends Controller
             return redirect("web/product");
 
         }
+    }
+
+
+    function fav($id)
+    {
+        $p = new FavModel();
+
+        $p->product_id = $id;
+        $p->user_id = session("user_id");
+
+        $p->save();
+
+
+        return redirect("web/fav_list");
+    }
+
+
+    function fav_list()
+    {
+        //$list = Product::all();
+
+        $list = DB::table("product as p")
+            ->join("fav as f","p.id","=","f.product_id")
+            ->where("f.user_id",session("user_id"))
+            ->select("p.*","f.id as fav_id")
+            ->get();
+
+        return view("web.fav_list")->with("list",$list);
+    }
+
+    function remove_fav($id)
+    {
+        $p = FavModel::find($id);
+        $p->delete();
+
+        return redirect("web/fav_list");
     }
 }
