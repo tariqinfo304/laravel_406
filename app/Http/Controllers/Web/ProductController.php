@@ -19,7 +19,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $listing  = Product::all();
+        $listing  = Product::paginate(3);
+       // $listing  = Product::simplePaginate(3);
+      //  $listing  = Product::cursorPaginate(3);
+
+
+     //dd($listing);
 
         return view("web.product.listing")->with("list", $listing );
     }

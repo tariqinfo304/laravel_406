@@ -84,39 +84,48 @@
                 
                 <h4> Product Listing <a style="float: right;" href="{{ URL('web/product/create') }}"><button class="btn btn-primary"><i class="fa fa-plus"></i> &nbsp;Add Product</button><a/></h4>
 
-                <table class="table table-dark">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Image</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Quantity</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Action</th>
+                <div class="row">
+                    {{ $list->links() }}
 
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($list as $row)
+                </div>
+                
+                <div class="row">
+                
+
+                    <table class="table table-dark">
+                      <thead>
                         <tr>
-                          <th scope="row">{{ $row->id }}</th>
-                          <td><img width="200px" height="200px" src="{{ Asset($row->display_image) }}" alt="{{ $row->name }}" /></td>
-                          <td>{{ $row->name }}</td>
-                          <td>{{ $row->price }}</td>
-                          <td>{{ $row->qty }}</td>
-                          <td>{{ $row->description }}</td>
-                          <td>
-                              
-                              <a href="{{ URL('web/product/'.$row->id.'/edit') }}"><i class="fa fa-edit"></i></a>
-                              &nbsp;&nbsp;&nbsp;&nbsp;
-                              <a href="{{ URL('web/product',$row->id) }}"><i class="fa fa-remove"></i></a>
-                          </td>
+                          <th scope="col">#</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Description</th>
+                          <th scope="col">Action</th>
+
+                          
                         </tr>
-                    @endforeach
-                  </tbody>
-                </table>
+                      </thead>
+                      <tbody>
+                        @foreach($list as $row)
+                            <tr>
+                              <th scope="row">{{ $row->id }}</th>
+                              <td><img width="200px" height="200px" src="{{ Asset($row->display_image) }}" alt="{{ $row->name }}" /></td>
+                              <td>{{ $row->name }}</td>
+                              <td>{{ $row->price }}</td>
+                              <td>{{ $row->qty }}</td>
+                              <td>{{ $row->description }}</td>
+                              <td>
+                                  
+                                  <a href="{{ URL('web/product/'.$row->id.'/edit') }}"><i class="fa fa-edit"></i></a>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+                                  <a href="{{ URL('web/product',$row->id) }}"><i class="fa fa-remove"></i></a>
+                              </td>
+                            </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
