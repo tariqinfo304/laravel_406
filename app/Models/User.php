@@ -53,4 +53,25 @@ class User extends Authenticatable
         return $this->hasMany(UserAddress::class,"user_id","id");
     }
 
+
+     /**
+     * Get the user's first name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    function getEmailAttribute($value)
+    {
+        return "Your Email : " .$value; 
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = "My Full name : $value";
+    }
 }

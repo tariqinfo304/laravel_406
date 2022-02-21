@@ -17,7 +17,15 @@ class ORMController extends Controller
 {
     function index()
     {
+
+        $user = User::find(1);
+        dd($user->toArray());
         
+        // $user = new User();
+        // $user->name = "Ali";
+        // $user->email = "ali23@gmail.com";
+        // $user->password = "test";
+        // $user->save();
 
         /*
         // Save 
@@ -172,8 +180,13 @@ class ORMController extends Controller
        // $c = Course::find(1);
        // dd($c->stduent_list);
 
+        /*
         $s = Student::find(1);
         dd($s->course_list);
+    */
+
+
+
 
 
 
