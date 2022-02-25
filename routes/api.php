@@ -22,6 +22,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
 
 Route::get("list",[APIController::class,"get_product"]);
-Route::get("create",[APIController::class,"create_product"]);
+Route::post("create",[APIController::class,"create_product"]);
 
 Route::get("r_list",[APIController::class,"list"]);

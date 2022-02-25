@@ -211,4 +211,6 @@ Route::prefix("web")->group(function(){
 });
 
 
+Route::get("api_call",[App\Http\Controllers\APICallController::class,"index"]);
+
 

@@ -11,9 +11,20 @@ use App\Models\ProductImages;
 class ShopController extends Controller
 {
     
-    function index()
+    function index(Request $req)
     {
-        return view("web.shop")->with("list",Product::all());
+        $list = [];
+
+        if(!empty($req->search))
+        {
+            $list = Product::Where('name',"like","%$req->search%")
+                                ->orWhere('price',"like","$req->search%")->get();
+        }
+        else
+        {
+            $list = Product::all();
+        }
+        return view("web.shop")->with("list",$list)->with("search",$req->search);
     }
 
     function shop_detail($id)

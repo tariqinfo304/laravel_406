@@ -43,7 +43,7 @@ class APIController extends Controller
     {
         if(!empty($req->name))
         {
-
+            return $this->send_respose(200,["data" => "data inserted successfully : $req->name"]);
         }
         else
         {
